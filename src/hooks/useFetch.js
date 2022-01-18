@@ -1,15 +1,22 @@
 import {useState, useEffect} from 'react'
 
-import React from 'react'
 
 const useFetch = (url, initialState) => {
     const [data, setData] = useState(initialState)
+
+    const abortFetch = new AbortController()
     
     useEffect(() => {
-        fetch(url)
+        fetch(url, {signal: abortFetch.signal})
         .then((response) => response.json())
         .then((results) => setData({results, loading: false, error: null}) )
-        .catch((error) => setData({results: null, loading: false, error}))
+        .catch((error) => {
+            abortFetch.signal.aborted
+            ? console.log('fetch aborted')
+            : setData({results: null, loading: false, error})
+        })
+
+        return () => abortFetch.abort()
     },[url])
 
     return data

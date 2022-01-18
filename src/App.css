@@ -29,6 +29,10 @@ header a {
   text-decoration: none;
 }
 
+.active {
+  color: red;
+}
+
 header h2 {
   margin-right: 180px;
   color: darkred;

@@ -18,11 +18,17 @@ const Nav = () => {
             <li>Home</li>
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to='/about'
             style={({ isActive }) => {
               return { color: isActive && 'green' };
             }}>
+            <li>About</li>
+          </NavLink> */}
+
+          <NavLink
+            to='/about'
+            className={({ isActive }) => (isActive ? 'active' : null)}>
             <li>About</li>
           </NavLink>
 
